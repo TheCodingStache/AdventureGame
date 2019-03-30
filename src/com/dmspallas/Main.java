@@ -48,7 +48,7 @@ public class Main {
             for (String exit : exits.keySet()) {
                 System.out.println(exit + ", ");
             }
-            System.out.println("\n");
+            System.out.println(" ");
             String direction = scanner.nextLine().toUpperCase();
 
             if (exits.containsKey(direction)) {

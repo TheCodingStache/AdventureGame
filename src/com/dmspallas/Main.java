@@ -24,7 +24,7 @@ public class Main {
 
         locations.get(2).addExit("Ν", 5);
 
-        locations.get(3).addExit("W", 3);
+        locations.get(3).addExit("W", 1);
 
         locations.get(4).addExit("N", 1);
         locations.get(4).addExit("W", 2);
@@ -32,19 +32,38 @@ public class Main {
         locations.get(5).addExit("S", 1);
         locations.get(5).addExit("W", 2);
 
+        Map<String, String> vocabulary = new HashMap<>();
+
+        vocabulary.put("QUIT", "Q");
+        vocabulary.put("WEST", "W");
+        vocabulary.put("EAST", "E");
+        vocabulary.put("SOUTH", "S");
+        vocabulary.put("NORTH", "N");
+
         int loc = 1;
         while (true) {
             System.out.println(locations.get(loc).getDescription());
             if (loc == 0) {
                 break;
             }
+
             Map<String, Integer> exits = locations.get(loc).getExits();
             System.out.println(" Available exits are");
             for (String exit : exits.keySet()) {
                 System.out.println(exit + ",");
             }
-            System.out.println(" ");
+
+            System.out.println("\n You can also type with words in which direction you want to go!");
             String direction = scanner.nextLine().toUpperCase();
+            if (direction.length() > 1) {
+                String[] words = direction.split(" ");
+                for (String word : words) {
+                    if (vocabulary.containsKey(word)) {
+                        direction = vocabulary.get(word);
+                        break;
+                    }
+                }
+            }
 
             if (exits.containsKey(direction)) {
                 loc = exits.get(direction);
